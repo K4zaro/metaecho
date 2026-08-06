@@ -1,0 +1,40 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+[tool.hatch.version]
+path = "src/metaecho/__init__.py"
+[project]
+name = "metaecho"
+dynamic = ["version"]
+dependencies = [
+    "typer>=0.12",
+]
+authors = [
+    { name="Konrad Zajczyk"}
+]
+description = "Python CLI for auditing file metadata and flagging sensitive information before publication."
+readme = "README.md"
+requires-python = ">= 3.11"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    #Delete and fill with correct info when ready
+    "Private :: Do Not Upload",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+[project.optional-dependencies]
+dev = ["ruff", "mypy", "pytest"]
+[project.scripts]
+metaecho = "metaecho.cli:app"
+mecho = "metaecho.cli:app"
+[project.urls]
+Homepage = "https://github.com/K4zaro/metaecho/tree/main"
+Repository = "https://github.com/K4zaro/metaecho.git"
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+[tool.mypy]
+python_version = "3.11"
+strict = true
