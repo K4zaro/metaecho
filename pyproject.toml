@@ -38,3 +38,9 @@ select = ["E", "F", "I", "B", "UP", "SIM"]
 [tool.mypy]
 python_version = "3.11"
 strict = true
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra" #q
+testpaths = [
+    "tests",
+]
