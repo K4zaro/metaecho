@@ -20,7 +20,7 @@ class FileError:
 class FileRecord:
     path: str
     size: int
-    detected_type: str
+    file_type: str
     extension_mismatch: bool
     metadata: dict[str, str]
     errors: list[FileError]
