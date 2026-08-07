@@ -16,12 +16,11 @@ def test_detect_docx() -> None:
         detected_type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
     )
 
+
 def test_detect_xlsx() -> None:
     path = pathlib.Path(__file__).parent / "fixtures" / "example.xlsx"
     detected_type = detect(path)
-    assert (
-        detected_type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
+    assert detected_type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
 
 def test_detect_pdf() -> None:
@@ -37,15 +36,18 @@ def test_detect_pptx() -> None:
         detected_type == "application/vnd.openxmlformats-officedocument.presentationml.presentation"
     )
 
+
 def test_detect_png() -> None:
     path = pathlib.Path(__file__).parent / "fixtures" / "example.png"
     detected_type = detect(path)
     assert detected_type == "image/png"
 
+
 def test_detect_unknown() -> None:
     path = pathlib.Path(__file__).parent / "fixtures" / "example.txt"
     detected_type = detect(path)
     assert detected_type is None
+
 
 def test_detect_edge_case_empty_file() -> None:
     path = pathlib.Path(__file__).parent / "fixtures" / "empty_file"
