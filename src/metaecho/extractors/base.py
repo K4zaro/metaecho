@@ -28,5 +28,5 @@ class MetadataExtractor(ABC):
             (e.g. a decryption error, a malformed-file error) when the file cannot
             be read. The caller is responsible for catching these and recording
             them as a FileError in the FileRecord — this method does not catch
-            them itself.       
+            them itself.
         """
