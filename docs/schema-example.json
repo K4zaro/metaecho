@@ -1,0 +1,29 @@
+{
+"schemaVersion":"1.0.0",
+"tool": {"name": "metaecho", "version": "0.0.1", "pythonVersion":"3.11.3"},
+"rulesetVersion":"...",
+"flags": ["-q", "--recursive"],
+"scan": {"startedAt": "2026-08-07T09:18:54+02:00", "finishedAt": "2026-08-07T09:19:11+02:00", "durationSeconds":1, "root":"folderFromWhichTheScanWasStartedZAnonimizacjąDUH", "filesScanned": 1, "filesSkipped": 1},
+"files": [
+{
+"path":"root/usr/<Username>/path", "size":1024, "detectedType":"image/jpeg",
+"extensionMismatch": false,
+      "metadata": { 
+        "EXIF.Camera.Make":"...", 
+        "EXIF.Camera.Model":"...", 
+        "EXIF.DateTimeOriginal":"...", 
+        "EXIF.GPSInfo.GPSLatitude":"...", 
+        "EXIF.GPSInfo.GPSLongitude":"..."
+      },
+      "errors": [{"type": "DecryptionError", "message": "..."}]
+}],
+"findings":[
+{
+"id":"...", "ruleId":"category-NNN", "category":"...", "severity":"...","filepath":"root/usr/<Username>/path",
+"title":"...", "description":"...","occurrences":[{"key":"...", "value":"..."}]
+}],
+"correlations":[],
+"summary": {
+  "bySeverity": {"critical": 1, "high": 1, "medium": 1, "low": 1, "info": 1},
+  "byCategory": {"gps": 1, "pii": 1, "paths": 1}
+}}
