@@ -8,6 +8,7 @@ name = "metaecho"
 dynamic = ["version"]
 dependencies = [
     "typer>=0.12",
+    "Pillow>=12.3.0",
 ]
 authors = [
     { name="Konrad Zajczyk"}
@@ -23,7 +24,7 @@ classifiers = [
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 [project.optional-dependencies]
-dev = ["ruff", "mypy", "pytest"]
+dev = ["ruff", "mypy", "pytest", "piexif"]
 [project.scripts]
 metaecho = "metaecho.cli:app"
 mecho = "metaecho.cli:app"
@@ -38,6 +39,9 @@ select = ["E", "F", "I", "B", "UP", "SIM"]
 [tool.mypy]
 python_version = "3.11"
 strict = true
+[[tool.mypy.overrides]]
+module = "piexif.*"
+ignore_missing_imports = true
 [tool.pytest.ini_options]
 minversion = "6.0"
 addopts = "-ra" #q

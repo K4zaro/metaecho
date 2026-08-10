@@ -34,7 +34,11 @@ def build_file_record(
             file_type=file_type,
             extension_mismatch=path.suffix.lower() not in expected_extensions,
             metadata={},
-            errors=[FileError(type="UnsupportedFileType", message=f"File type {file_type} is not supported.")],
+            errors=[
+                FileError(
+                    type="UnsupportedFileType", message=f"File type {file_type} is not supported."
+                )
+            ],
         )
     errors: list[FileError] = []
     try:
