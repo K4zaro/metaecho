@@ -1,3 +1,4 @@
+import io
 import pathlib
 
 import piexif
@@ -5,6 +6,12 @@ from PIL import Image
 
 
 def generate_gps_jpeg() -> None:
+    o = io.BytesIO()
+    example = pathlib.Path(__file__).parent / "example.jpg"
+    thumb_im = Image.open(example)
+    thumb_im.thumbnail((50, 50), Image.Resampling.LANCZOS)
+    thumb_im.save(o, "jpeg")
+    thumbnail = o.getvalue()
     img = Image.new("RGB", (10, 10), color="red")
 
     zeroth_ifd = {
@@ -40,7 +47,7 @@ def generate_gps_jpeg() -> None:
         "Exif": exif_ifd,
         "GPS": gps_ifd,
         "1st": first_ifd,
-        "thumbnail": None,
+        "thumbnail": thumbnail,
     }
     exif_bytes = piexif.dump(exif_dict)
     path = pathlib.Path(__file__).parent / "generated_gps.jpeg"

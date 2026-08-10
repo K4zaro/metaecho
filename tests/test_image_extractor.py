@@ -46,3 +46,19 @@ def test_omit_nonexistent_gps_coordinates() -> None:
 
     assert "EXIF.GPSInfo.GPSLatitude" not in metadata
     assert "EXIF.GPSInfo.GPSLongitude" not in metadata
+
+
+def test_exif_thumbnail_not_present() -> None:
+    path = pathlib.Path(__file__).parent / "fixtures" / "example.jpg"
+    extractor = ImageExtractor()
+    metadata = extractor.extract(path)
+
+    assert "EXIF.Thumbnail.Present" not in metadata
+
+
+def test_exif_thumbnail_present() -> None:
+    path = pathlib.Path(__file__).parent / "fixtures" / "generated_gps.jpeg"
+    extractor = ImageExtractor()
+    metadata = extractor.extract(path)
+
+    assert "EXIF.Thumbnail.Present" in metadata

@@ -80,6 +80,14 @@ class ImageExtractor(MetadataExtractor):
             for k, v in img.getexif().get_ifd(ExifTags.IFD.GPSInfo).items()
             if k in ExifTags.GPSTAGS
         }
+        ifd1 = {
+            str(ExifTags.TAGS[k]): v
+            for k, v in img.getexif().get_ifd(ExifTags.IFD.IFD1).items()
+            if k in ExifTags.TAGS
+        }
+        if ifd1.get("JpegIFByteCount", 0) > 0:
+            exif["EXIF.Thumbnail.Present"] = "true"
+
         if "GPSLatitude" in exifGPS and "GPSLatitudeRef" in exifGPS:
             exifGPS.update(
                 {
