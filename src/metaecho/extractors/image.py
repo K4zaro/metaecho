@@ -54,13 +54,13 @@ def _dms_to_decimal(
 
 def get_tag_prefix(tag_name: str) -> str:
     if tag_name in CAMERA_TAGS:
-        return "EXIF.CAMERA."
+        return "EXIF.Camera."
     if tag_name in SOFTWARE_TAGS:
-        return "EXIF.SOFTWARE."
+        return "EXIF.Software."
     if tag_name in PII_TAGS:
         return "EXIF.PII."
     if tag_name in TIMESTAMP_TAGS:
-        return "EXIF.TIMESTAMP."
+        return "EXIF.Timestamp."
     return "EXIF."
 
 
