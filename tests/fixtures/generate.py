@@ -57,6 +57,13 @@ def generate_gps_jpeg() -> None:
     path = pathlib.Path(__file__).parent / "generated_gps.jpeg"
     img.save(path, exif=exif_bytes)
 
+    # Damaged File Generation
+    damaged_path = pathlib.Path(__file__).parent / "generated_damaged.jpeg"
+    with open(path, "rb") as f:
+        dmg = f.read(40)
+    with open(damaged_path, "wb") as f:
+        f.write(dmg)
+
 
 def generate_pdf_with_metadata() -> None:
 

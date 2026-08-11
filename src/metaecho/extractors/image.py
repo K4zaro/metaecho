@@ -4,6 +4,7 @@ from typing import Literal
 from PIL import ExifTags, Image
 
 from metaecho.extractors.base import MetadataExtractor
+from metaecho.extractors.utils import truncate
 
 # MAX_IMAGE_PIXELS = value  # change if you need more than 89,478,485 pixels (e.g. for high res img)
 
@@ -71,7 +72,9 @@ class ImageExtractor(MetadataExtractor):
     def extract(self, path: pathlib.Path) -> dict[str, str]:
         img = Image.open(path)
         exif = {
-            str(ExifTags.TAGS[k]): str(v) for k, v in img.getexif().items() if k in ExifTags.TAGS
+            str(ExifTags.TAGS[k]): truncate(str(v))
+            for k, v in img.getexif().items()
+            if k in ExifTags.TAGS
         }
         exif = {f"{get_tag_prefix(name)}{name}": value for name, value in exif.items()}
 
@@ -111,6 +114,6 @@ class ImageExtractor(MetadataExtractor):
                 }
             )
 
-        exifGPS = {"EXIF.GPSInfo." + name: str(value) for name, value in exifGPS.items()}
+        exifGPS = {"EXIF.GPSInfo." + name: truncate(str(value)) for name, value in exifGPS.items()}
 
         return exif | exifGPS

@@ -4,6 +4,7 @@ import zipfile
 import defusedxml.ElementTree as ET
 
 from metaecho.extractors.base import MetadataExtractor
+from metaecho.extractors.utils import truncate
 
 CORE_NAMESPACES = {
     "dc": "http://purl.org/dc/elements/1.1/",
@@ -63,7 +64,7 @@ class OoxmlExtractor(MetadataExtractor):
                 for field in CORE_FIELDS:
                     data = root.find(field, CORE_NAMESPACES)
                     if data is not None and data.text is not None:
-                        ooxml_meta_core.update({f"OOXML.Core.{field}": data.text})
+                        ooxml_meta_core.update({f"OOXML.Core.{field}": truncate(data.text)})
             else:
                 ooxml_meta_core = {}
             if "docProps/app.xml" in zip_file.namelist():
@@ -77,7 +78,7 @@ class OoxmlExtractor(MetadataExtractor):
                 for field in APP_FIELDS:
                     data = root.find(field, APP_NAMESPACES)
                     if data is not None and data.text is not None:
-                        ooxml_meta_app.update({f"OOXML.App.{field}": data.text})
+                        ooxml_meta_app.update({f"OOXML.App.{field}": truncate(data.text)})
             else:
                 ooxml_meta_app = {}
         return ooxml_meta_core | ooxml_meta_app

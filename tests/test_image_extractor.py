@@ -1,6 +1,8 @@
 import pathlib
 
+from metaecho.detect import detect
 from metaecho.extractors.image import ImageExtractor, _dms_to_decimal
+from metaecho.extractors.registry import build_file_record
 
 
 def test_dms_to_decimal_north() -> None:
@@ -62,3 +64,14 @@ def test_exif_thumbnail_present() -> None:
     metadata = extractor.extract(path)
 
     assert "EXIF.Thumbnail.Present" in metadata
+
+
+def test_file_error_damaged_file() -> None:
+    path = pathlib.Path(__file__).parent / "fixtures" / "generated_damaged.jpeg"
+    extractor = ImageExtractor()
+    file_type = detect(path)
+    assert file_type is not None
+    build = build_file_record(path, file_type, [extractor])
+
+    assert build.errors
+    assert build.metadata == {}

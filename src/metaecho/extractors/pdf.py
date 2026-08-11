@@ -4,6 +4,7 @@ from datetime import datetime
 from pypdf import PdfReader
 
 from metaecho.extractors.base import MetadataExtractor
+from metaecho.extractors.utils import truncate
 
 
 def _join_list(values: list[str]) -> str:
@@ -11,7 +12,7 @@ def _join_list(values: list[str]) -> str:
 
 
 def _flatten_lang_dict(values: dict[str, str], field_name: str) -> dict[str, str]:
-    return {f"PDF.XMP.{field_name}.{lang}": text for lang, text in values.items()}
+    return {f"PDF.XMP.{field_name}.{lang}": truncate(text) for lang, text in values.items()}
 
 
 def _join_dates(values: list[datetime]) -> str:
@@ -29,7 +30,7 @@ class PDFExtractor(MetadataExtractor):
         doc_info = pdf.metadata
         if doc_info is not None:
             doc_meta = {
-                str("PDF.DocInfo." + str(k).lstrip("/")): str(v)
+                str("PDF.DocInfo." + str(k).lstrip("/")): truncate(str(v))
                 for k, v in doc_info.items()
                 if v is not None
             }
@@ -65,12 +66,12 @@ class PDFExtractor(MetadataExtractor):
         xmp_info = pdf.xmp_metadata
         if xmp_info is not None:
             xmp_meta_str = {
-                f"PDF.XMP.{name}": str(getattr(xmp_info, name))
+                f"PDF.XMP.{name}": truncate(str(getattr(xmp_info, name)))
                 for name in CAT_STR
                 if getattr(xmp_info, name) is not None
             }
             xmp_meta_list = {
-                f"PDF.XMP.{name}": str(_join_list(getattr(xmp_info, name)))
+                f"PDF.XMP.{name}": truncate(_join_list(getattr(xmp_info, name)))
                 for name in CAT_LIST
                 if getattr(xmp_info, name) is not None
             }
@@ -85,13 +86,13 @@ class PDFExtractor(MetadataExtractor):
             else:
                 xmp_meta_list_date = {}
             xmp_meta_date = {
-                f"PDF.XMP.Date.{name}": getattr(xmp_info, name).isoformat()
+                f"PDF.XMP.Date.{name}": truncate(getattr(xmp_info, name).isoformat())
                 for name in CAT_DATE
                 if getattr(xmp_info, name) is not None
             }
             dc_custom = xmp_info.custom_properties
             xmp_meta_custom = {
-                str(f"PDF.XMP.Custom.{name}"): str(v) for name, v in dc_custom.items()
+                str(f"PDF.XMP.Custom.{name}"): truncate(str(v)) for name, v in dc_custom.items()
             }
 
             xmp_meta = (
