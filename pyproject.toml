@@ -10,6 +10,7 @@ dependencies = [
     "typer>=0.12",
     "Pillow>=12.3.0",
     "pypdf>=6.15.0",
+    "defusedxml",
 ]
 authors = [
     { name="Konrad Zajczyk"}
@@ -25,7 +26,7 @@ classifiers = [
 license = "MIT"
 license-files = ["LICEN[CS]E*"]
 [project.optional-dependencies]
-dev = ["ruff", "mypy", "pytest", "piexif"]
+dev = ["ruff", "mypy", "pytest", "piexif", "types-defusedxml"]
 [project.scripts]
 metaecho = "metaecho.cli:app"
 mecho = "metaecho.cli:app"

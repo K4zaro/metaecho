@@ -24,7 +24,7 @@ def test_detect_xlsx() -> None:
 
 
 def test_detect_pdf() -> None:
-    path = pathlib.Path(__file__).parent / "fixtures" / "generated_pdf.pdf"
+    path = pathlib.Path(__file__).parent / "fixtures" / "example.pdf"
     detected_type = detect(path)
     assert detected_type == "application/pdf"
 

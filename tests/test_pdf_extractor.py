@@ -58,7 +58,7 @@ def test_pdf_xmp_dc_date_presence() -> None:
 
 
 def test_omit_empty_metadata_pdf() -> None:
-    path = pathlib.Path(__file__).parent / "fixtures" / "generated_pdf.pdf"
+    path = pathlib.Path(__file__).parent / "fixtures" / "example.pdf"
     extractor = PDFExtractor()
     metadata = extractor.extract(path)
 
