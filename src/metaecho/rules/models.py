@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 
 from metaecho.models import Severity
 
 
-class MatchType(Enum):
+class MatchType(StrEnum):
     KEY_PRESENCE = "key-presence"
     NON_DEFAULT = "non-default"
     VALUE_PATTERN = "value-pattern"
