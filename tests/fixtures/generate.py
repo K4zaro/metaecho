@@ -163,10 +163,10 @@ def generate_ooxml_with_metadata() -> None:
             <dcterms:modified xsi:type="dcterms:W3CDTF">2024-01-02T00:00:00Z</dcterms:modified>
         </cp:coreProperties>"""
 
-    app_xml_content = """<Properties 
+    app_xml_content = r"""<Properties 
         xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties" 
         xmlns:vt="http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes">
-            <Template>Normal.dotm</Template>
+            <Template>C:\Users\testuser\AppData\Roaming\Microsoft\Templates\Normal.dotm</Template>
             <TotalTime>69</TotalTime>
             <Company>THE COMPANY</Company>
             <Pages>2</Pages>
